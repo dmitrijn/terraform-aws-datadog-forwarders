@@ -416,3 +416,65 @@ output "traces_endpoint_state" {
   description = "The state of the traces VPC endpoint"
   value       = try(aws_vpc_endpoint.traces[0].state, "")
 }
+
+# Profiling VPC Endpoint
+output "profiling_endpoint_id" {
+  description = "ID of the profiling VPC endpoint"
+  value       = try(aws_vpc_endpoint.profiling[0].id, "")
+}
+
+output "profiling_endpoint_arn" {
+  description = "ARN of the profiling VPC endpoint"
+  value       = try(aws_vpc_endpoint.profiling[0].arn, "")
+}
+
+output "profiling_endpoint_dns_entry" {
+  description = "DNS entries of the profiling VPC endpoint"
+  value       = try(aws_vpc_endpoint.profiling[0].dns_entry, "")
+}
+
+output "profiling_endpoint_network_interface_ids" {
+  description = "One or more network interfaces for the profiling VPC endpoint"
+  value       = try(aws_vpc_endpoint.profiling[0].network_interface_ids, "")
+}
+
+output "profiling_endpoint_owner_id" {
+  description = "The ID of the AWS account that owns the profiling VPC endpoint"
+  value       = try(aws_vpc_endpoint.profiling[0].owner_id, "")
+}
+
+output "profiling_endpoint_state" {
+  description = "The state of the profiling VPC endpoint"
+  value       = try(aws_vpc_endpoint.profiling[0].state, "")
+}
+
+# Containers VPC Endpoint
+output "containers_endpoint_id" {
+  description = "ID of the containers VPC endpoint"
+  value       = try(aws_vpc_endpoint.containers[0].id, "")
+}
+
+output "containers_endpoint_arn" {
+  description = "ARN of the containers VPC endpoint"
+  value       = try(aws_vpc_endpoint.containers[0].arn, "")
+}
+
+output "containers_endpoint_dns_entry" {
+  description = "DNS entries of the containers VPC endpoint"
+  value       = try(aws_vpc_endpoint.containers[0].dns_entry, "")
+}
+
+output "containers_endpoint_network_interface_ids" {
+  description = "One or more network interfaces for the containers VPC endpoint"
+  value       = try(aws_vpc_endpoint.containers[0].network_interface_ids, "")
+}
+
+output "containers_endpoint_owner_id" {
+  description = "The ID of the AWS account that owns the containers VPC endpoint"
+  value       = try(aws_vpc_endpoint.containers[0].owner_id, "")
+}
+
+output "containers_endpoint_state" {
+  description = "The state of the containers VPC endpoint"
+  value       = try(aws_vpc_endpoint.containers[0].state, "")
+}

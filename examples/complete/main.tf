@@ -233,7 +233,7 @@ resource "aws_kms_alias" "datadog" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   name = local.name
   cidr = "10.0.0.0/16"
@@ -266,7 +266,7 @@ module "vpc" {
 
 module "vpc_endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [module.security_group.security_group_id]
@@ -287,7 +287,7 @@ module "vpc_endpoints" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name        = local.name
   description = "Example security group"

@@ -163,7 +163,7 @@ module "vpc_flow_log_forwarder" {
 resource "aws_vpc_endpoint" "metrics" {
   count = var.create_metrics_vpce ? 1 : 0
 
-  service_name        = "com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca"
+  service_name        = var.metrics_vpce_service_name
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
@@ -178,7 +178,7 @@ resource "aws_vpc_endpoint" "metrics" {
 resource "aws_vpc_endpoint" "agent" {
   count = var.create_agent_vpce ? 1 : 0
 
-  service_name        = "com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf"
+  service_name        = var.agent_vpce_service_name
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
@@ -193,7 +193,7 @@ resource "aws_vpc_endpoint" "agent" {
 resource "aws_vpc_endpoint" "log_forwarder" {
   count = var.create_log_forwarder_vpce ? 1 : 0
 
-  service_name        = "com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97"
+  service_name        = var.log_forwarder_vpce_service_name
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
@@ -208,7 +208,7 @@ resource "aws_vpc_endpoint" "log_forwarder" {
 resource "aws_vpc_endpoint" "api" {
   count = var.create_api_vpce ? 1 : 0
 
-  service_name        = "com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0"
+  service_name        = var.api_vpce_service_name
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
@@ -223,7 +223,7 @@ resource "aws_vpc_endpoint" "api" {
 resource "aws_vpc_endpoint" "processes" {
   count = var.create_processes_vpce ? 1 : 0
 
-  service_name        = "com.amazonaws.vpce.us-east-1.vpce-svc-05316fe237f6d8ddd"
+  service_name        = var.processes_vpce_service_name
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
@@ -238,7 +238,7 @@ resource "aws_vpc_endpoint" "processes" {
 resource "aws_vpc_endpoint" "traces" {
   count = var.create_traces_vpce ? 1 : 0
 
-  service_name        = "com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24"
+  service_name        = var.traces_vpce_service_name
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
 
@@ -248,4 +248,34 @@ resource "aws_vpc_endpoint" "traces" {
   policy             = var.traces_vpce_policy
 
   tags = merge({ Name = "datadog-traces" }, var.tags, var.traces_vpce_tags)
+}
+
+resource "aws_vpc_endpoint" "profiling" {
+  count = var.create_profiling_vpce ? 1 : 0
+
+  service_name        = var.profiling_vpce_service_name
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = true
+
+  vpc_id             = var.vpc_id
+  subnet_ids         = var.profiling_vpce_subnet_ids
+  security_group_ids = var.profiling_vpce_security_group_ids
+  policy             = var.profiling_vpce_policy
+
+  tags = merge({ Name = "datadog-profiling" }, var.tags, var.profiling_vpce_tags)
+}
+
+resource "aws_vpc_endpoint" "containers" {
+  count = var.create_containers_vpce ? 1 : 0
+
+  service_name        = var.containers_vpce_service_name
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = true
+
+  vpc_id             = var.vpc_id
+  subnet_ids         = var.containers_vpce_subnet_ids
+  security_group_ids = var.containers_vpce_security_group_ids
+  policy             = var.containers_vpce_policy
+
+  tags = merge({ Name = "datadog-containers" }, var.tags, var.containers_vpce_tags)
 }
