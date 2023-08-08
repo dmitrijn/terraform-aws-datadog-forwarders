@@ -151,7 +151,7 @@ locals {
       name    = "orchestrator"
       type    = "CNAME"
       ttl     = 3600
-      records = ["${aws_vpc_endpoint.containers[0].dns_entry}"]
+      records = [aws_vpc_endpoint.containers[0].dns_entry]
     },
   ] : []
   create_profiling_vpce = var.create_profiling_vpce ? [
@@ -159,7 +159,7 @@ locals {
       name    = "intake.profile"
       type    = "CNAME"
       ttl     = 3600
-      records = ["${aws_vpc_endpoint.profiling[0].dns_entry}"]
+      records = [aws_vpc_endpoint.profiling[0].dns_entry]
     },
   ] : []
   create_traces_vpce = var.create_traces_vpce ? [
@@ -167,7 +167,7 @@ locals {
       name    = "trace"
       type    = "CNAME"
       ttl     = 3600
-      records = ["${aws_vpc_endpoint.traces[0].dns_entry}"]
+      records = [aws_vpc_endpoint.traces[0].dns_entry]
     },
   ] : []
   create_processes_vpce = var.create_processes_vpce ? [
@@ -175,7 +175,7 @@ locals {
       name    = "process"
       type    = "CNAME"
       ttl     = 3600
-      records = ["${aws_vpc_endpoint.processes[0].dns_entry}"]
+      records = [aws_vpc_endpoint.processes[0].dns_entry]
     },
   ] : []
   create_api_vpce = var.create_api_vpce ? [
@@ -183,7 +183,7 @@ locals {
       name    = "api"
       type    = "CNAME"
       ttl     = 3600
-      records = ["${aws_vpc_endpoint.api[0].dns_entry}"]
+      records = [aws_vpc_endpoint.api[0].dns_entry]
     },
   ] : []
   create_log_forwarder_vpce = var.create_log_forwarder_vpce ? [
@@ -191,7 +191,7 @@ locals {
       name    = "http-intake.logs"
       type    = "CNAME"
       ttl     = 3600
-      records = ["${aws_vpc_endpoint.log_forwarder[0].dns_entry}"]
+      records = [aws_vpc_endpoint.log_forwarder[0].dns_entry]
     },
   ] : []
   create_agent_vpce = var.create_agent_vpce ? [
@@ -199,7 +199,7 @@ locals {
       name    = "agent-http-intake.logs"
       type    = "CNAME"
       ttl     = 3600
-      records = ["${aws_vpc_endpoint.agent[0].dns_entry}"]
+      records = [aws_vpc_endpoint.agent[0].dns_entry]
     },
   ] : []
   create_metrics_vpce = var.create_metrics_vpce ? [
@@ -207,7 +207,7 @@ locals {
       name    = "metrics.agent"
       type    = "CNAME"
       ttl     = 3600
-      records = ["${aws_vpc_endpoint.metrics[0].dns_entry}"]
+      records = [aws_vpc_endpoint.metrics[0].dns_entry]
     },
   ] : []
 }
@@ -231,6 +231,7 @@ module "route53_records" {
     local.create_metrics_vpce,
     local.create_agent_vpce,
     local.create_log_forwarder_vpce,
+    local.create_processes_vpce,
   )
 
   depends_on = [aws_route53_zone.datadoghq_zone]
